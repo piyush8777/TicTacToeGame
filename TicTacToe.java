@@ -4,9 +4,7 @@ public class TicTacToe {
 	 private int counter;
 	    private   char posn[]=new char[10];
 	    private   char player;
-	  
-	    
-	    public static void main(String args[])
+	   public static void main(String args[])
 	    {
 	        String ch;
 	        
@@ -49,13 +47,7 @@ public class TicTacToe {
 	        System.out.println(  " \t\t    |    |   " );
 	        System.out.println(  "\n\n" );
 	        return "currentBoard";
-	        
-	        
-	        
-	        
-	      
-	    }
-	    
+	         }
 	    public  void play()
 	    {
 	        int spot;
@@ -70,7 +62,6 @@ public class TicTacToe {
 	            
 	            boolean posTaken = true;
 	            while (posTaken) {
-	                // System.out.println( "position is taken, please enter a valid space");
 	                Scanner in =new Scanner (System.in);
 	                spot=in.nextInt();
 	                posTaken = checkPosn(spot);
