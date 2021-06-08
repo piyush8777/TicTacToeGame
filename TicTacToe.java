@@ -1,167 +1,133 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class TicTacToe {
-	 private int counter;
-	    private   char posn[]=new char[10];
-	    private   char player;
-	   public static void main(String args[])
-	    {
-	        String ch;
-	        
-	        TicTacToe Toe=new TicTacToe();
-	        do{
-	            Toe.newBoard();
-	            Toe.play();
-	            System.out.println ("Would you like to play again (Enter 'yes')? ");
-	            Scanner in =new Scanner(System.in);
-	            ch=in.nextLine();
-	            System.out.println("ch value is  "+ch);
-	        }while (ch.equals("yes"));
-	        
-	        
-	    }
-	    public  void newBoard()
-	    {
-	        
-	        char posndef[] = {'0','1', '2', '3', '4', '5', '6', '7', '8', '9'};
-	        int i;
-	        counter = 0;
-	        player = 'X';
-	        for (i=1; i<10; i++) posn[i]=posndef[i];
-	        currentBoard();
-	        
-	        
-	    }
-	    public  String currentBoard()
-	    {
-	        System.out.println( "\n\n" );
-	        System.out.println(  "\n\n" );
-	        System.out.println(  "\n\n\t\t" + posn [1] + "   | " +posn [2]+ "  | " +posn [3]);
-	        System.out.println(  " \t\t    |    |   " );
-	        System.out.println(  " \t\t ___|____|___ " );
-	        System.out.println(  "\n\n\t\t" +posn [4]+ "   | " +posn [5]+ "  | " +posn [6]);
-	        System.out.println(  " \t\t    |    |   " );
-	        System.out.println(  " \t\t ___|____|___ " );
-	        System.out.println(  "\n\n\t\t" +posn [7]+ "   | " +posn [8]+ "  | " +posn [9]);
-	        System.out.println(  " \t\t    |    |   " );
-	        System.out.println(  " \t\t    |    |   " );
-	        System.out.println(  "\n\n" );
-	        return "currentBoard";
-	         }
-	    public  void play()
-	    {
-	        int spot;
-	        char blank = ' ';
-	        
-	        System.out.println(  "Player " + getPlayer() +" will go first and be the letter 'X'" );
-	        
-	        do {
-	            currentBoard();              // display current board
-	            
-	            System.out.println(  "\n\n Player " + getPlayer() +" choose a posn." );
-	            
-	            boolean posTaken = true;
-	            while (posTaken) {
-	                Scanner in =new Scanner (System.in);
-	                spot=in.nextInt();
-	                posTaken = checkPosn(spot);
-	                if(posTaken==false)
-	                posn[spot]=getPlayer();
-	            }
-	            
-	            System.out.println(  "Nice move." );
-	            
-	            currentBoard();              // display current board
-	            
-	            nextPlayer();
-	        }while ( checkWinner() == blank );
-	        
-	        
-	    }
-	    
-	    public  char checkWinner()
-	    {
-	 
-	        char Winner = ' ';
-	        
-	        // Check if X wins
-	        if (posn[1] == 'X' && posn[2] == 'X' && posn[3] == 'X') Winner = 'X';
-	        if (posn[4] == 'X' && posn[5] == 'X' && posn[6] == 'X') Winner = 'X';
-	        if (posn[7] == 'X' && posn[8] == 'X' && posn[9] == 'X') Winner = 'X';
-	        if (posn[1] == 'X' && posn[4] == 'X' && posn[7] == 'X') Winner = 'X';
-	        if (posn[2] == 'X' && posn[5] == 'X' && posn[8] == 'X') Winner = 'X';
-	        if (posn[3] == 'X' && posn[6] == 'X' && posn[9] == 'X') Winner = 'X';
-	        if (posn[1] == 'X' && posn[5] == 'X' && posn[9] == 'X') Winner = 'X';
-	        if (posn[3] == 'X' && posn[5] == 'X' && posn[7] == 'X') Winner = 'X';
-	        if (Winner == 'X' )
-	        {System.out.println("Player1 wins the game." );
-	            return Winner;
-	        }
-	        
-	        // Check if O wins
-	        if (posn[1] == 'O' && posn[2] == 'O' && posn[3] == 'O') Winner = 'O';
-	        if (posn[4] == 'O' && posn[5] == 'O' && posn[6] == 'O') Winner = 'O';
-	        if (posn[7] == 'O' && posn[8] == 'O' && posn[9] == 'O') Winner = 'O';
-	        if (posn[1] == 'O' && posn[4] == 'O' && posn[7] == 'O') Winner = 'O';
-	        if (posn[2] == 'O' && posn[5] == 'O' && posn[8] == 'O') Winner = 'O';
-	        if (posn[3] == 'O' && posn[6] == 'O' && posn[9] == 'O') Winner = 'O';
-	        if (posn[1] == 'O' && posn[5] == 'O' && posn[9] == 'O') Winner = 'O';
-	        if (posn[3] == 'O' && posn[5] == 'O' && posn[7] == 'O') Winner = 'O';
-	        if (Winner == 'O' )
-	        {
-	            System.out.println( "Player2 wins the game." );
-	        return Winner; }
-	        
-	        // check for Tie
-	        for(int i=1;i<10;i++)
-	        {
-	            if(posn[i]=='X' || posn[i]=='O')
-	            {
-	                if(i==9)
-	                {
-	                    char Draw='D';
-	                    System.out.println(" Game is stalemate ");
-	                    return Draw;
-	                }
-	                continue;
-	            }
-	            else
-	            break;
-	            }
-	        
-	        return Winner;
-	    }
-	    
-	    public  boolean checkPosn(int spot)
-	    {
-	        
-	        
-	        if (posn[spot] == 'X' || posn[spot] == 'O')
-	        {
-	            System.out.println("That posn is already taken, please choose another");
-	            return true;
-	        }
-	        else {
-	            return false;
-	        }
-	    }
+	private static char playerChoice;
+	private static char computerChoice;
+	private static boolean isPlayer;
+	private static int indexCount = 0;
+	static Scanner scan = new Scanner(System.in);
+	static char board[] = new char[10];
 
-	    public  void nextPlayer()
-	    {
-	        if (player == 'X')
-	        player = 'O';
-	        else player = 'X';
-	        
-	    }
-	    
-	    public String getTitle()
-	    {
-	        return "Tic Tac Toe" ;
-	    }
-	    
-	    public  char getPlayer()
-	    {
-	        return player;
-	    }
+	
+	private char[] creatBoard() {
+		for (int i = 1; i < board.length; i++) {
+			board[i] = ' ';
+		}
+		return board;
+	}
 
+	
+	private static void showBoard() {
+		System.out.println(board[1] + "|" + board[2] + "|" + board[3]);
+		System.out.println("-+-+-");
+		System.out.println(board[4] + "|" + board[5] + "|" + board[6]);
+		System.out.println("-+-+-");
+		System.out.println(board[7] + "|" + board[8] + "|" + board[9]);
+	}
+
+	
+	private void chooseLetter() {
+		// taking user input
+		System.out.println("Select the letter X or O:");
+		char inputLetter = scan.next().charAt(0);
+		if (inputLetter == 'x') {
+			playerChoice = 'x';
+			computerChoice = 'o';
+		} else if (inputLetter == 'o') {
+			playerChoice = 'o';
+			computerChoice = 'x';
+		} else
+			System.out.println("Invalid symbol...."); // invalid Symbol
+		// return playerChoice;
+	}
+
+	
+	private static void makeMove() {
+		if (indexCount == 9) {
+			System.out.println("Player Reaches Max Turn count");
+		} else {
+			if (isPlayer) {
+				System.out.println("Select the position from 1-9:");
+				int userPosition = scan.nextInt();
+				if (board[userPosition] == ' ') {
+					board[userPosition] = playerChoice;
+					isPlayer = false;
+					indexCount++;
+				} else {
+					System.out.println("This position is already occupied");
+				}
+			} else {
+				Random rand = new Random();
+				int computerPosition = rand.nextInt(9) + 1;
+				if (board[computerPosition] == ' ') {
+					board[computerPosition] = computerChoice;
+					isPlayer = true;
+					indexCount++;
+				} else {
+					System.out.println("This position is already occupied");
+				}
+			}
+		}
+	}
+
+	
+	private void checkToss() {
+		int head = 1;
+		Random rand = new Random();
+		int toss = rand.nextInt(2);
+		if (toss == head) {
+			System.out.println("Player is playing!!!");
+			isPlayer = true;
+		} else {
+			System.out.println("Computer is playing!!");
+			isPlayer = false;
+		}
+	}
+
+	private static void winOrTie() {
+		if (board[1] == 'x' && board[2] == 'x' && board[3] == 'x'
+				|| board[4] == 'x' && board[5] == 'x' && board[6] == 'x'
+				|| board[7] == 'x' && board[8] == 'x' && board[9] == 'x'
+				|| board[1] == 'x' && board[4] == 'x' && board[7] == 'x'
+				|| board[2] == 'x' && board[5] == 'x' && board[8] == 'x'
+				|| board[3] == 'x' && board[6] == 'x' && board[9] == 'x'
+				|| board[1] == 'x' && board[5] == 'x' && board[9] == 'x'
+				|| board[3] == 'x' && board[5] == 'x' && board[7] == 'x') {
+			if (playerChoice == 'x') {
+				System.out.println("****Congrats you win the Game****");
+			} else {
+				System.out.println("**Computer wins the Game**");
+			}
+		} else if (board[1] == 'o' && board[2] == 'o' && board[3] == 'o'
+				|| board[4] == 'o' && board[5] == 'o' && board[6] == 'o'
+				|| board[7] == 'o' && board[8] == 'o' && board[9] == 'o'
+				|| board[1] == 'o' && board[4] == 'o' && board[7] == 'o'
+				|| board[2] == 'o' && board[5] == 'o' && board[8] == 'o'
+				|| board[3] == 'o' && board[6] == 'o' && board[9] == 'o'
+				|| board[1] == 'o' && board[5] == 'o' && board[9] == 'o'
+				|| board[3] == 'o' && board[5] == 'o' && board[7] == 'o') {
+			if (playerChoice == 'o') {
+				System.out.println("Computer wins the Game");
+			} else {
+				System.out.println("Congrats you win the Game");
+			}
+		} else if (indexCount == 9) {
+			System.out.println("Game is tie");
+		}
+	}
+
+	public static void main(String[] args) {
+		System.out.println("Welcome to TicTacToe Game!!"); 
+		TicTacToe tictactoeboard = new TicTacToe();
+		tictactoeboard.creatBoard(); 
+		tictactoeboard.chooseLetter(); 
+		tictactoeboard.checkToss();
+		while (indexCount < 9) {
+			makeMove();
+			showBoard();
+			winOrTie();
+			System.out.println("----------");
+		}
+	}
 }
